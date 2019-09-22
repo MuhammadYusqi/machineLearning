@@ -10,10 +10,10 @@ def ecludian(x, y):
 
 def kmean(data, center, n):
     label = np.zeros(len(data))
-    clus0 = []
-    clus1 = []
     print(center)
     for epho in range(n):
+        clus0 = []
+        clus1 = []
         for i in range(len(data)):
             temp0 = ecludian(data[i], center[0])
             temp1 = ecludian(data[i], center[1])
@@ -23,12 +23,16 @@ def kmean(data, center, n):
                 clus1.append(data[i])
             else:
                 clus0.append(data[i])
-            clus0 = np.array(clus0)
-            clus1 = np.array(clus1)
-            plt.plot(clus0[:, 0], clus0[:, 1], 'ro', clus1[:, 0], clus1[:, 1], 'ro')
-            plt.show()
+
+        clus0 = np.array(clus0)
+        clus1 = np.array(clus1)
+        print(clus0)
         center[0] = np.average(np.array(clus0), axis=0)
         center[1] = np.average(np.array(clus1), axis=0)
+        plt.plot(clus0[:, 0], clus0[:, 1], 'ro', clus1[:, 0], clus1[:, 1], 'bs', center[:, 0], center[:, 1], 'g^')
+        plt.savefig('epho%s.png'%epho)
+        plt.close()
+        # plt.show()
         print(center)
     return center
 
