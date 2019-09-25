@@ -2,6 +2,7 @@ import numpy as np
 import csv
 from sklearn import datasets
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
 
 
 def loadCSV(fileName):
@@ -56,3 +57,4 @@ reg = LinearRegression().fit(dataTrain, target)
 
 print(R2(target, predict))
 print(reg.score(dataTrain, target))
+print(r2_score(target, predict))
