@@ -34,10 +34,19 @@ def kmean(data, center, n):
         plt.close()
         # plt.show()
         print(center)
-    return center
+    return center, clus0, clus1, label
 
+def predict(x, center):
+    label = np.zeros(len(x))
+    for i in range(len(x)):
+        temp0 = ecludian(x[i], center[0])
+        temp1 = ecludian(x[i], center[1])
+        label[i] = np.argmin([temp0, temp1])
+    return label
 
 data = np.array([[7,5],[5,7],[7,7],[3,3],[4,6],[1,4],[0,0],[2,2],[8,7],[6,8]])
 center = np.array([[4,6],[5,5]], dtype=float)
 
-print(kmean(data, center, 10))
+newCenter, clus0, clus1, label = kmean(data, center, 10)
+newLabel = predict(data, newCenter)
+print(label == newLabel)
